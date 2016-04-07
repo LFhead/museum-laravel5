@@ -26,12 +26,18 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/',function(){return redirect('/login');});
+
+    Route::get('/register','auth\AuthController@getRegister');
+    Route::post('/register','auth\AuthController@postRegister');
+    Route::get('/login','auth\AuthController@getLogin');
+    Route::post('/login','auth\AuthController@postLogin');
+    Route::get('/logout','auth\AuthController@logout');
 });
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    Route::get('/', 'sitescontroller@index');
+    //Route::get('/', 'sitescontroller@index');
     Route::get('list', ['middleware'=>'auth','uses'=>'sitescontroller@collection_list']);
     Route::get('favorates', ['middleware'=>'auth','uses'=>'sitescontroller@favorates']);
     //Route::get('collection/create','sitescontroller@create');
@@ -44,6 +50,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('collection/like/{id}',['middleware'=>'auth','uses'=>'sitescontroller@like']);
     Route::get('collection/dislike/{id}',['middleware'=>'auth','uses'=>'sitescontroller@dislike']);
     Route::get('user/list',['middleware'=>'admin','uses'=>'sitescontroller@user_list']);
+
+    Route::post('user/modify','UserController@modify');
+    Route::post('user/delete','UserController@delete');
 
     Route::get('/home', 'HomeController@index');
 });

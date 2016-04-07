@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-    <h1>new collection</h1>
+    <h1 align="center">添加藏品</h1>
 {!! Form::open(['url'=>'collection/store']) !!}
    <div class="form-group">
        {!! Form::label('name','名称:') !!}

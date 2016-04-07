@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Collection;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class sitescontroller extends Controller
 {
@@ -58,7 +59,8 @@ class sitescontroller extends Controller
         return redirect('list');
     }
     public function user_list(){
-        $users = User::all();
+        //$users = User::all();
+        $users = DB::table('users')->get();
         return view('pages.user_list',compact('users'));
     }
     public function like($id){

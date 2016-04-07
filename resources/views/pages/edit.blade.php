@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-    <h1>edit collection</h1>
+    <h1 align="center">编辑藏品信息</h1>
 {!! Form::model($collection,['url'=>'collection/update']) !!}
     {!! Form::hidden('id',$collection->id) !!}
    <div class="form-group">
