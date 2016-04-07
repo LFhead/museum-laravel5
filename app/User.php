@@ -27,4 +27,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Collection','user_collection');
     }
+    public function history()
+    {
+        return $this->belongsToMany('App\Collection','user_history');
+    }
 }

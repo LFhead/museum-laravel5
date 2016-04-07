@@ -41,6 +41,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('collection/edit/{id}',['middleware'=>'admin','uses'=>'sitescontroller@edit']);
     Route::post('collection/store',['middleware'=>'admin','uses'=>'sitescontroller@store']);
     Route::get('collections/{id}', ['middleware'=>'auth','uses'=>'sitescontroller@show']);
+    Route::get('history/clear', ['middleware'=>'auth','uses'=>'sitescontroller@clear']);
     Route::get('collection/like/{id}',['middleware'=>'auth','uses'=>'sitescontroller@like']);
     Route::get('collection/dislike/{id}',['middleware'=>'auth','uses'=>'sitescontroller@dislike']);
     Route::get('user/list',['middleware'=>'admin','uses'=>'sitescontroller@user_list']);

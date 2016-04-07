@@ -51,4 +51,9 @@ $(document).ready(function(){
    @endif
 {!! Form::close() !!}
 </div>
+@foreach($collections as $collection)
+@if (Auth::user()->history()->find($collection->id))
+    {{$collection->name}}
+@endif
+@endforeach
 @endsection

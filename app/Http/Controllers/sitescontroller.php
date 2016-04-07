@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Collection;
 use App\User;
 use Auth;
+use Carbon\Carbon;
 
 class sitescontroller extends Controller
 {
@@ -27,7 +28,15 @@ class sitescontroller extends Controller
     }
     public function show($id){
         $collection = Collection::findOrFail($id);
+        if (Auth::user()->history()->find($id))
+            Auth::user()->history()->updateExistingPivot($id,['updated_at'=>Carbon::now()]);
+        else
+            Auth::user()->history()->attach($id);
         return view('pages.show',compact('collection'));
+    }
+    public function clear(){
+        Auth::user()->history()->detach();
+        return redirect('list');
     }
     public function create(){
         return view('pages.create');
