@@ -46,6 +46,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('collection/like/{id}',['middleware'=>'auth','uses'=>'sitescontroller@like']);
     Route::get('collection/dislike/{id}',['middleware'=>'auth','uses'=>'sitescontroller@dislike']);
     Route::get('user/list',['middleware'=>'admin','uses'=>'sitescontroller@user_list']);
+    Route::get('list/{type}',['middleware'=>'auth','uses'=>'sitescontroller@type']);
 
     //Route::get('/home', 'HomeController@index');
 });

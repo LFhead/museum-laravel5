@@ -14,7 +14,7 @@ $(document).ready(function(){
 });
 </script>
 <h1>{{$title}}</h1>
-<div class="row row-offcanvas row-offcanvas-right">
+<div class="row row-offcanvas row-offcanvas-right" style="margin:0">
 <div class="col-xs-12 col-sm-9" style="border:1px solid #ddd;border-radius:5px;">
 {!! Form::open(['url'=>'collection/delete']) !!}
 @foreach($collections as $collection)
@@ -31,7 +31,7 @@ $(document).ready(function(){
   </div>
   <div class="media-body">
     <h2 class="media-heading"><a href="/collections/{{ $collection->id }}"> {{ $collection->name }}</a>
-        <div style="float:right">
+        <div style="float:right" class="h4">
             <like meth="dislike" cid="{{ $collection->id }}"  @if (!Auth::user()->collections()->find($collection->id)) style="display: none" @endif ><span class="glyphicon glyphicon-star" aria-hidden="true"></span>已收藏</like>
             <like meth="like" cid="{{ $collection->id }}"  @if (Auth::user()->collections()->find($collection->id)) style="display: none" @endif ><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>收藏&nbsp&nbsp&nbsp&nbsp</like>
             @if (Auth::user()['privilege'])
@@ -39,6 +39,7 @@ $(document).ready(function(){
             @endif
         </div>
     </h2>
+    <h6>{{ $collection->type }}</h6>
     <p>{{ $collection->intro }}</p>
   </div>
 </div>
@@ -56,7 +57,7 @@ $(document).ready(function(){
 <h2>历史纪录</h2>
 @foreach(Auth::user()->history as $his)
 <div class="thumbnail">
-      <a href="/collections/{{ $his->id }}"><img src="{{ $his->img_url }}" alt="{{ $his->name }}" width="200px"> </a>
+      <a href="/collections/{{ $his->id }}"><img src="/{{ $his->img_url }}" alt="{{ $his->name }}" width="200px"> </a>
       <div class="caption">
         <h3>{{ $his->name }}</h3>
         <p>{{ $his->intro }}</p>

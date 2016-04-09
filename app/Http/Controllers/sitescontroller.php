@@ -28,6 +28,11 @@ class sitescontroller extends Controller
         $title = '我的收藏';
         return view('pages.list',compact('collections','title'));
     }
+    public function type($type){
+        $collections = Collection::where('type', $type)->get();
+        $title = $type;
+        return view('pages.list',compact('collections','title'));
+    }
     public function show($id){
         $collection = Collection::findOrFail($id);
         if (Auth::user()->history()->find($id))

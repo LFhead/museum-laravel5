@@ -12,7 +12,8 @@ class Collection extends Model
         'intro',
         'img_url',
         'location',
-        'time_rec'
+        'time_rec',
+        'type'
     ];
     public function users()
     {

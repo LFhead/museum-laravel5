@@ -39,20 +39,20 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            藏品列表 <span class="caret"></span>
+                        </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>注销</a></li>
-                                <li><a href="{{ url('favorates') }}">我的收藏</a></li>
-                                @if (Auth::user()->privilege)
-                                <li><a href="{{ url('collection/create') }}">新增藏品</a></li>
-                                <li><a href="{{ url('user/list') }}">用户列表</a></li>
-                                @endif
-                            </ul>
-                        </li>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/list">全部</a></li>
+                            <li><a href="/list/文物">文物</a></li>
+                            <li><a href="/list/书画">书画</a></li>
+                            <li><a href="/list/玉器">玉器</a></li>
+                            <li><a href="/list/珠宝">珠宝</a></li>
+                            <li><a href="/list/其他">其他</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav">
                     <li><a href="#">猜你喜欢</a></li>
