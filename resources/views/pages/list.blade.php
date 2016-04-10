@@ -40,7 +40,8 @@ $(document).ready(function(){
         </div>
     </h2>
     <h6>{{ $collection->type }}</h6>
-    <p>{{ $collection->intro }}</p>
+    <hr />
+    <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ $collection->intro }}</p>
   </div>
 </div>
 </collection>

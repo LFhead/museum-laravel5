@@ -55,7 +55,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="#">猜你喜欢</a></li>
+                    <li><a href="/recommend">猜你喜欢</a></li>
                 </ul>
                 <ul class="nav navbar-nav">
                     <li><a href="#">路线推荐</a></li>

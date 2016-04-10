@@ -10,6 +10,7 @@ use App\Collection;
 use App\User;
 use Auth;
 use Carbon\Carbon;
+use App\UserRecommend;
 
 class sitescontroller extends Controller
 {
@@ -111,5 +112,11 @@ class sitescontroller extends Controller
     public function dislike($id){
         Auth::user()->collections()->detach($id);
         //return redirect($_SERVER['REQUEST_URI']);
+    }
+
+    public function recommend(){
+        $collections = Auth::user()->recommend;
+        $title = '猜你喜欢';
+        return view('pages.list',compact('collections','title'));
     }
 }

@@ -49,4 +49,5 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('list/{type}',['middleware'=>'auth','uses'=>'sitescontroller@type']);
 
     //Route::get('/home', 'HomeController@index');
+    Route::get('recommend',['middleware'=>'auth','uses'=>'sitescontroller@recommend']);
 });
