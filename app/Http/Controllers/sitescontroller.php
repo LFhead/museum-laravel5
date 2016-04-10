@@ -116,12 +116,18 @@ class sitescontroller extends Controller
     }
 
     public function recommend(){
+        $dir = dirname(__FILE__);
+        exec($dir."/recommend.py");
+
         $collections = Auth::user()->recommend;
         $title = '猜你喜欢';
         return view('pages.list',compact('collections','title'));
     }
 
     public function recommendTime(){
+        $dir = dirname(__FILE__);
+        exec($dir."/recommend.py");
+        
         $input = Request::all();
         $title = '路线推荐';
         if(empty($input)){
