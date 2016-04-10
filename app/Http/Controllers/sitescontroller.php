@@ -20,11 +20,18 @@ class sitescontroller extends Controller
     }
     public function collection_list(){
         $collections = Collection::all();
-        return view('pages.list',compact('collections'));
+        $title = '藏品列表';
+        return view('pages.list',compact('collections','title'));
     }
     public function favorates(){
-        $collections = Collection::all();
-        return view('pages.favorates',compact('collections'));
+        $collections = Auth::user()->collections;
+        $title = '我的收藏';
+        return view('pages.list',compact('collections','title'));
+    }
+    public function type($type){
+        $collections = Collection::where('type', $type)->get();
+        $title = $type;
+        return view('pages.list',compact('collections','title'));
     }
     public function show($id){
         $collection = Collection::findOrFail($id);
@@ -56,14 +63,41 @@ class sitescontroller extends Controller
     }
     public function store(){
         $input = Request::all();
+        //dd($input);
+        $file=$input['img'];
+        $allowed_extensions = ["png", "jpg", "gif"];
+        if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+            return ['error' => 'You may only upload png, jpg or gif.'];
+        }
+        $destinationPath = 'uploads/images/';
+        $extension = $file->getClientOriginalExtension();
+        $fileName = str_random(10).'.'.$extension;
+        $file->move($destinationPath, $fileName);
+        
+        $input['img_url']=$destinationPath.$fileName;
         Collection::create($input);
         return redirect('list');
     }
-    public function update(Request $request){
+    public function update(){
         //dd($request::all());
-        $collection = Collection::findOrFail($request::get('id'));
         //dd($collection);
-        $collection->update($request::except('id'));
+        $input = Request::all();
+        $collection = Collection::findOrFail($input['id']);
+        if(!empty($input->img)){
+        $file=$input['img'];
+        $allowed_extensions = ["png", "jpg", "gif"];
+        if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+            return ['error' => 'You may only upload png, jpg or gif.'];
+        }
+        $destinationPath = 'uploads/images/';
+        $extension = $file->getClientOriginalExtension();
+        $fileName = str_random(10).'.'.$extension;
+        $file->move($destinationPath, $fileName);
+        
+        $input['img_url']=$destinationPath.$fileName;}
+        else
+        $input['img_url']=$collection['img_url'];
+        $collection->update($input);
         return redirect('list');
     }
     public function user_list(){

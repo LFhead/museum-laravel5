@@ -31,7 +31,8 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    Route::get('/', 'sitescontroller@index');
+    //Route::get('/', 'sitescontroller@index');
+    Route::get('/', ['middleware'=>'auth','uses'=>'sitescontroller@collection_list']);
     Route::get('list', ['middleware'=>'auth','uses'=>'sitescontroller@collection_list']);
     Route::get('favorates', ['middleware'=>'auth','uses'=>'sitescontroller@favorates']);
     //Route::get('collection/create','sitescontroller@create');
@@ -45,6 +46,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('collection/like/{id}',['middleware'=>'auth','uses'=>'sitescontroller@like']);
     Route::get('collection/dislike/{id}',['middleware'=>'auth','uses'=>'sitescontroller@dislike']);
     Route::get('user/list',['middleware'=>'admin','uses'=>'sitescontroller@user_list']);
+    Route::get('list/{type}',['middleware'=>'auth','uses'=>'sitescontroller@type']);
 
-    Route::get('/home', 'HomeController@index');
+    //Route::get('/home', 'HomeController@index');
 });

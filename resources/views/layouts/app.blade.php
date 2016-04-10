@@ -9,27 +9,16 @@
 
     <script src="/js/jquery-2.2.2.min.js" ></script>
     <!-- Fonts -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-    <link rel='stylesheet' href="/css/all.css" type='text/css' media='all'/>
     <link rel='stylesheet' href="/css/bootstrap.min.css" type='text/css' media='all'/>
+    <link rel='stylesheet' href="/css/bootstrap-theme.min.css" type='text/css' media='all'/>
     <!--link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"-->
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
-    <style>
-        body {
-            font-family: 'Lato';
-        }
-
-        .fa-btn {
-            margin-right: 6px;
-        }
-    </style>
 </head>
-<body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+<body style="background-color:lightgray" id="app-layout">
+    <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -42,7 +31,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="#">
                     博物馆
                 </a>
             </div>
@@ -50,15 +39,34 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            藏品列表 <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/list">全部</a></li>
+                            <li><a href="/list/文物">文物</a></li>
+                            <li><a href="/list/书画">书画</a></li>
+                            <li><a href="/list/玉器">玉器</a></li>
+                            <li><a href="/list/珠宝">珠宝</a></li>
+                            <li><a href="/list/其他">其他</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="#">猜你喜欢</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="#">路线推荐</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ url('/login') }}">登陆</a></li>
+                        <li><a href="{{ url('/register') }}">注册</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -66,11 +74,11 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                                <li><a href="{{ url('favorates') }}">favorates</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>注销</a></li>
+                                <li><a href="{{ url('favorates') }}">我的收藏</a></li>
                                 @if (Auth::user()->privilege)
-                                <li><a href="{{ url('collection/create') }}">new collection</a></li>
-                                <li><a href="{{ url('user/list') }}">user list</a></li>
+                                <li><a href="{{ url('collection/create') }}">新增藏品</a></li>
+                                <li><a href="{{ url('user/list') }}">用户列表</a></li>
                                 @endif
                             </ul>
                         </li>
@@ -80,11 +88,13 @@
         </div>
     </nav>
 
+    <div class="container">
     @yield('content')
-
+    </div>
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="/js/jquery-2.2.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
