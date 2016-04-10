@@ -119,4 +119,39 @@ class sitescontroller extends Controller
         $title = '猜你喜欢';
         return view('pages.list',compact('collections','title'));
     }
+
+    public function recommendTime(){
+        $input = Request::all();
+        $title = '路线推荐';
+        if(empty($input)){
+            $collection = Auth::user()->collections;
+            $recommend = Auth::user()->recommend;
+            $collections = $collection->merge($recommend);
+            return view('pages.recommend',compact('collections','title'));
+        }
+        else{
+            $time = intval(Request::get('time'));
+
+            $collection = Auth::user()->collections;
+            $recommend = Auth::user()->recommend;
+
+            $collections = collect();
+
+            foreach ($collection as $data) {
+                if ($time >= intval($data->time_rec)) {
+                    $collections->push($data);
+                    $time = $time - intval($data->time_rec);
+                }
+            }
+
+            foreach ($recommend as $data) {
+                if ($time >= intval($data->time_rec)) {
+                    $collections->push($data);
+                    $time = $time - intval($data->time_rec);
+                }
+            }
+
+            return view('pages.recommend',compact('collections','title'));
+        }
+    }
 }

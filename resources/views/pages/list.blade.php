@@ -6,13 +6,16 @@ $(document).ready(function(){
   $("like").click(function(){
         geturl='collection/'+this.getAttribute('meth')+'/'+this.getAttribute('cid');
         $.get(geturl,function(data,status){
-            //alert("数据：" + data + "\n状态：" + status);
         });
         ccid=$(this).attr('cid');
         $('[cid='+ccid+']').toggle();
   });
 });
 </script>
+
+@section('input')
+@show
+
 <h1>{{$title}}</h1>
 <div class="row row-offcanvas row-offcanvas-right" style="margin:0">
 <div class="col-xs-12 col-sm-9" style="border:1px solid #ddd;border-radius:5px;">

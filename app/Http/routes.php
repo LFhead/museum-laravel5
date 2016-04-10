@@ -50,4 +50,6 @@ Route::group(['middleware' => 'web'], function () {
 
     //Route::get('/home', 'HomeController@index');
     Route::get('recommend',['middleware'=>'auth','uses'=>'sitescontroller@recommend']);
+    Route::post('recommend/time',['middleware'=>'auth','uses'=>'sitescontroller@recommendTime']);
+
 });
