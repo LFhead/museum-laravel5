@@ -31,11 +31,9 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    //Route::get('/', 'sitescontroller@index');
     Route::get('/', ['middleware'=>'auth','uses'=>'sitescontroller@collection_list']);
     Route::get('list', ['middleware'=>'auth','uses'=>'sitescontroller@collection_list']);
     Route::get('favorates', ['middleware'=>'auth','uses'=>'sitescontroller@favorates']);
-    //Route::get('collection/create','sitescontroller@create');
     Route::get('collection/create',['middleware'=>'admin','uses'=>'sitescontroller@create']);
     Route::post('collection/update',['middleware'=>'admin','uses'=>'sitescontroller@update']);
     Route::post('collection/delete',['middleware'=>'admin','uses'=>'sitescontroller@delete']);
@@ -47,9 +45,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('collection/dislike/{id}',['middleware'=>'auth','uses'=>'sitescontroller@dislike']);
     Route::get('user/list',['middleware'=>'admin','uses'=>'sitescontroller@user_list']);
     Route::get('list/{type}',['middleware'=>'auth','uses'=>'sitescontroller@type']);
-
-    //Route::get('/home', 'HomeController@index');
     Route::get('recommend',['middleware'=>'auth','uses'=>'sitescontroller@recommend']);
     Route::post('recommend/time',['middleware'=>'auth','uses'=>'sitescontroller@recommendTime']);
+    Route::get('recommend/time',['middleware'=>'auth','uses'=>'sitescontroller@recommendTime']);
 
+    Route::post('user/modify','sitescontroller@userModify');
+    Route::post('user/delete','sitescontroller@userDelete');
 });

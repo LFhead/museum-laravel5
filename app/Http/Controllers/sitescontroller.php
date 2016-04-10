@@ -11,6 +11,7 @@ use App\User;
 use Auth;
 use Carbon\Carbon;
 use App\UserRecommend;
+use Illuminate\Support\Facades\DB;
 
 class sitescontroller extends Controller
 {
@@ -153,5 +154,26 @@ class sitescontroller extends Controller
 
             return view('pages.recommend',compact('collections','title'));
         }
+    }
+
+    public function userModify(){
+        $input = Request::all();
+        $user = User::find(Request::get('id'));
+        if(!empty($user)) {
+            $user->privilege = Request::get('privilege');
+            $user->save();
+        }
+        
+        return redirect('user/list');
+    }
+
+    public function userDelete() {
+        $input = Request::all();
+        $user = User::find(Request::get('id'));
+        if(!empty($user)) {
+            $user->delete();
+        }
+       
+        return redirect('user/list');
     }
 }
