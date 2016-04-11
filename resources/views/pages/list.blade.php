@@ -42,7 +42,6 @@ $(document).ready(function(){
             @endif
         </div>
     </h2>
-    <h6>{{ $collection->type }}</h6>
     <hr />
     <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ $collection->intro }}</p>
   </div>
