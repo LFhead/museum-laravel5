@@ -158,6 +158,16 @@ class sitescontroller extends Controller
                 }
             }
 
+            $all = Collection::all();
+            foreach ($all as $data) {
+                if (!($collections->contains($data))) {
+                    if($time >= intval($data->time_rec)) {
+                        $collections->push($data);
+                        $time = $time - intval($data->time_rec);
+                    }
+                }
+            }
+
             return view('pages.recommend',compact('collections','title'));
         }
     }

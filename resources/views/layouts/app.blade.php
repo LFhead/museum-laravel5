@@ -66,7 +66,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">登陆</a></li>
+                        <li><a href="{{ url('/login') }}">登录</a></li>
                         <li><a href="{{ url('/register') }}">注册</a></li>
                     @else
                         <li class="dropdown">
