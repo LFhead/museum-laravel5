@@ -146,23 +146,23 @@ class sitescontroller extends Controller
 
             foreach ($collection as $data) {
                 if ($time >= intval($data->time_rec)) {
-                    $collections->push($data);
+                    $collections->put(strval($data->id),$data);
                     $time = $time - intval($data->time_rec);
                 }
             }
 
             foreach ($recommend as $data) {
                 if ($time >= intval($data->time_rec)) {
-                    $collections->push($data);
+                    $collections->put(strval($data->id),$data);
                     $time = $time - intval($data->time_rec);
                 }
             }
 
             $all = Collection::all();
             foreach ($all as $data) {
-                if (!($collections->contains($data))) {
+                if (!($collections->contains(strval($data->id)))) {
                     if($time >= intval($data->time_rec)) {
-                        $collections->push($data);
+                        $collections->put(strval($data->id),$data);
                         $time = $time - intval($data->time_rec);
                     }
                 }

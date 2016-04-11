@@ -49,6 +49,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('recommend/time',['middleware'=>'auth','uses'=>'sitescontroller@recommendTime']);
     Route::get('recommend/time',['middleware'=>'auth','uses'=>'sitescontroller@recommendTime']);
 
-    Route::post('user/modify','sitescontroller@userModify');
-    Route::post('user/delete','sitescontroller@userDelete');
+    Route::post('user/modify',['middleware'=>'admin','uses'=>'sitescontroller@userModify']);
+    Route::post('user/delete',['middleware'=>'admin','uses'=>'sitescontroller@userDelete']);
 });
